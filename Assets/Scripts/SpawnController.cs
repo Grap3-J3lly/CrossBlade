@@ -54,7 +54,15 @@ public class SpawnController : MonoBehaviour
     }
 
     private void AddNewPlayer() {
-        PhotonNetwork.Instantiate(playerType, startingPosition, Quaternion.identity);
+        Quaternion startingAngle;
+        if(gameManager.GetCurrentPlayers().Count < 1) {
+            startingAngle = gameManager.GetPlayerOneAngle();
+        }
+        else {
+            startingAngle = gameManager.GetPlayerTwoAngle();
+        }
+
+        PhotonNetwork.Instantiate(playerType, startingPosition, startingAngle);
     }
 
 }
