@@ -18,6 +18,15 @@ public class CardController : MonoBehaviour
     private bool inSnapArea = false;
     private bool currentSize = false;
 
+    private bool inPlay = false;
+
+    //------------------------------------------------------
+    //                  GETTERS/SETTERS
+    //------------------------------------------------------
+
+    public bool GetInPlay() {return inPlay;}
+    public void SetInPlay(bool newValue) {inPlay = newValue;}
+
     //------------------------------------------------------
     //                  STANDARD FUNCTIONS
     //------------------------------------------------------
@@ -42,6 +51,8 @@ public class CardController : MonoBehaviour
         if(colliderInfo.gameObject.GetComponent<SnapController>() != null) {
             inSnapArea = true;
             objectOfCollision = colliderInfo.gameObject;
+
+            EnterPlayArea(colliderInfo.gameObject);
         }
         
     }
@@ -50,6 +61,8 @@ public class CardController : MonoBehaviour
         if(colliderInfo.gameObject.GetComponent<SnapController>() != null) {
             inSnapArea = false;
             objectOfCollision = null;
+
+            ExitPlayArea(colliderInfo.gameObject);
         }
     }
 
@@ -71,11 +84,25 @@ public class CardController : MonoBehaviour
         grasping = false;
     }
 
+    private void EnterPlayArea(GameObject potentialPlayArea) {
+        if(potentialPlayArea.name.ToLower().Equals("playlocation")) {
+            Debug.Log("Card placed in Play area");
+            inPlay = true;
+        }
+    }
+
+    private void ExitPlayArea(GameObject potentialPlayArea) {
+        if(potentialPlayArea.name.ToLower().Equals("playlocation")) {
+            Debug.Log("Card removed from Play area");
+            inPlay = false;
+        }
+    }
+
     //------------------------------------------------------
     //              GENERAL CARD FUNCTIONS
     //------------------------------------------------------
 
-    private void ChangeSize(bool changeToSmall) {
+    public void ChangeSize(bool changeToSmall) {
         if(changeToSmall) {
             currentSize = true;
             GetComponent<Transform>().localScale = smallScale;

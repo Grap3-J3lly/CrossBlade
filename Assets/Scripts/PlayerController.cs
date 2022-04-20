@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private PhotonView view;
     private bool newPlayerAdded;
 
+    private DeckController deckController;
+
     // MR Player Variables
     [SerializeField] private GameObject mrCamera1;
     [SerializeField] private GameObject mrCamera2;
@@ -30,6 +32,9 @@ public class PlayerController : MonoBehaviour
     // General Variables
     public bool GetUsingMixedReality() {return usingMixedReality;}
     public void SetUsingMixedReality(bool newValue) {usingMixedReality = newValue;}
+
+    public DeckController GetDeckController() {return deckController;}
+    public void SetDeckController(DeckController newController) {deckController = newController;}
 
     // MR Player Variables
     public GameObject GetMrCamera1() {return mrCamera1;}
@@ -67,7 +72,7 @@ public class PlayerController : MonoBehaviour
             
             HandleVRSetup(gameManager.GetMrPlayer().GetComponent<PlayerController>());
         }
-        
+        AssignDeck();
     }
 
     private void Update() {
@@ -116,6 +121,10 @@ public class PlayerController : MonoBehaviour
         }
         
 
+    }
+
+    public void AssignDeck() {
+        deckController = gameObject.GetComponentInChildren<DeckController>();
     }
 
     private void AssignParent(GameObject targetParent) {
