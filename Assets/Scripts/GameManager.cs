@@ -114,10 +114,20 @@ public class GameManager : MonoBehaviour
         if(playerOneReady && playerTwoReady) {
             playerOneReady = false;
             playerTwoReady = false;
-            gameLogic = gameObject.AddComponent<GameLogic>();
+
+            gameLogic = CheckForGameLogic(gameObject);
+
             gameLogic.SetReadyToStart(true);
             gameLogic.StartGame();
         }
+    }
+
+    private GameLogic CheckForGameLogic(GameObject currentObject) {
+        if(currentObject.GetComponent<GameLogic>() == null) {
+            currentObject.AddComponent<GameLogic>();
+        }
+
+        return currentObject.GetComponent<GameLogic>();
     }
 
 }
