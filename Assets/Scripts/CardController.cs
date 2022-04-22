@@ -1,4 +1,5 @@
 using Leap.Unity.Interaction;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,13 +13,15 @@ public class CardController : MonoBehaviour
     [SerializeField] private Vector3 smallScale = new Vector3(.1f, -.0025f, .15f);
     [SerializeField] private Vector3 largeScale = new Vector3(1f, -.0025f, 1.5f);
     
+    [SerializeField] private bool inPlay = false;
+
     private InteractionBehaviour interactionBehavior;
     private GameObject objectOfCollision;
     private bool grasping;
     private bool inSnapArea = false;
     private bool currentSize = false;
 
-    private bool inPlay = false;
+    public event Action onCardInPlay;
 
     //------------------------------------------------------
     //                  GETTERS/SETTERS
@@ -31,16 +34,31 @@ public class CardController : MonoBehaviour
     //                  STANDARD FUNCTIONS
     //------------------------------------------------------
 
-    public void Start() {
+    private void Awake() {
         interactionBehavior = GetComponent<InteractionBehaviour>();
-        interactionBehavior.OnGraspBegin += HandleBeginGrasp;
-        interactionBehavior.OnGraspEnd += HandleEndGrasp;
     }
 
-    public void Update() {
+    private void OnEnable() {
+        interactionBehavior.OnGraspBegin += HandleBeginGrasp;
+        interactionBehavior.OnGraspEnd += HandleEndGrasp;
+        //onCardInPlay += ChangeInPlayState;
+    }
+
+    private void Start() {
+        
+        
+    }
+
+    private void Update() {
         if(changeSize) {
             ChangeSize(!currentSize);
         }
+    }
+
+    private void OnDisable() {
+        interactionBehavior.OnGraspBegin -= HandleBeginGrasp;
+        interactionBehavior.OnGraspEnd -= HandleEndGrasp;
+        //onCardInPlay -= ChangeInPlayState;
     }
 
     //------------------------------------------------------
@@ -88,6 +106,7 @@ public class CardController : MonoBehaviour
         if(potentialPlayArea.name.ToLower().Equals("playlocation")) {
             Debug.Log("Card placed in Play area");
             inPlay = true;
+            CardInPlayEvent();
         }
     }
 
@@ -95,6 +114,7 @@ public class CardController : MonoBehaviour
         if(potentialPlayArea.name.ToLower().Equals("playlocation")) {
             Debug.Log("Card removed from Play area");
             inPlay = false;
+            CardInPlayEvent();
         }
     }
 
@@ -131,6 +151,16 @@ public class CardController : MonoBehaviour
     private void SnapToLocation(GameObject targetObject) {
         transform.position = targetObject.transform.position;
         transform.rotation = targetObject.transform.rotation;
+    }
+
+    //------------------------------------------------------
+    //              EVENT RELATED FUNCTIONS
+    //------------------------------------------------------
+
+    public void CardInPlayEvent() {
+        if(onCardInPlay != null) {
+            onCardInPlay();
+        }
     }
 
 }

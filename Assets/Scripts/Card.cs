@@ -13,7 +13,9 @@ public class Card
 
     public string cardName;
     public GameObject cardObject;
-    
+
+    private CardController cardController;
+
     public enum Weapon {
         Greatsword,
         TowerShield
@@ -29,19 +31,8 @@ public class Card
     //                   GETTERS/SETTERS
     //------------------------------------------------------
 
-    public CardController GetCardController() {return cardObject.GetComponent<CardController>();}
-
-    //------------------------------------------------------
-    //                   STANDARD FUNCTIONS
-    //------------------------------------------------------
-
-    private void Start() {
-        gameManager = GameManager.Instance;
-    }
-
-    private void Update() {
-        CheckController();
-    }
+    public CardController GetCardController() {return cardController;}
+    public void SetCardController(CardController newController) {cardController = newController;}
 
     //------------------------------------------------------
     //                   SPAWN FUNCTIONS
@@ -65,10 +56,19 @@ public class Card
         return weaponList.Find(weaponToFind => weaponToFind.name.ToLower().Contains(weaponName));
     }
 
-    private void CheckController() {
-        if(cardObject != null) {
-            inPlay = cardObject.GetComponent<CardController>().GetInPlay();
-        }
+    public void UpdateInPlayCard() {
+        // Need event in Card Controller to call this method
+        inPlay = cardObject.GetComponent<CardController>().GetInPlay();
+    }
+
+    public void HandleCardSetup(string newCardName, GameObject newObject, Weapon weaponType, List<Card> cardList) { {}
+        cardName = newCardName;
+        cardObject = newObject;
+        cardController = cardObject.GetComponent<CardController>();
+        cardController.onCardInPlay += UpdateInPlayCard;
+        weapon = weaponType;
+        AssignWeaponObject(weapon);
+        cardList.Add(this);
     }
 
 }

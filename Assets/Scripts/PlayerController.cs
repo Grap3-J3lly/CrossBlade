@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private DeckController deckController;
 
+    [SerializeField] private ItemController itemController;
+
     // MR Player Variables
     [SerializeField] private GameObject mrCamera1;
     [SerializeField] private GameObject mrCamera2;
@@ -35,6 +37,9 @@ public class PlayerController : MonoBehaviour
 
     public DeckController GetDeckController() {return deckController;}
     public void SetDeckController(DeckController newController) {deckController = newController;}
+
+    public ItemController GetItemController() {return itemController;}
+    public void SetItemController(ItemController newController) {itemController = newController;}
 
     // MR Player Variables
     public GameObject GetMrCamera1() {return mrCamera1;}
