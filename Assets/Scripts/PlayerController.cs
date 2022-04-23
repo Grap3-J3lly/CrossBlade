@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
             
             HandleVRSetup(gameManager.GetMrPlayer().GetComponent<PlayerController>());
         }
+        gameManager.SetCurrentPlayer(gameObject);
         AssignDeck();
     }
 
