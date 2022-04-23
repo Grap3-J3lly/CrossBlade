@@ -43,8 +43,8 @@ public class ItemController : MonoBehaviour
         List<Vector3> greatSwordTransform = weaponTransform.defaultGreatswordTransform;
         AssignParent(weaponSpawn, chosenWeapon);
         
-        chosenWeapon.transform.position = greatSwordTransform[0];
-        chosenWeapon.transform.rotation = Quaternion.Euler(greatSwordTransform[1]);
+        chosenWeapon.transform.localPosition = greatSwordTransform[0];
+        chosenWeapon.transform.localRotation = Quaternion.Euler(greatSwordTransform[1]);
         chosenWeapon.transform.localScale = greatSwordTransform[2];
     }
 
@@ -53,8 +53,9 @@ public class ItemController : MonoBehaviour
         List<Vector3> towerShieldTransform = weaponTransform.defaultTowerShieldTransform;
         AssignParent(weaponSpawn, chosenWeapon);
         
-        chosenWeapon.transform.position = towerShieldTransform[0];
-        chosenWeapon.transform.rotation = Quaternion.Euler(towerShieldTransform[1]);
+        Debug.Log("TowerShield Transform Position: " + towerShieldTransform[0]);
+        chosenWeapon.transform.localPosition = towerShieldTransform[0];
+        chosenWeapon.transform.localRotation = Quaternion.Euler(towerShieldTransform[1]);
         chosenWeapon.transform.localScale = towerShieldTransform[2];
     }
 

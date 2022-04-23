@@ -48,19 +48,11 @@ public class ButtonController : MonoBehaviour
         CheckGMInstance();
 
         List<GameObject> allPlayers = gameManager.GetCurrentPlayers();
-        
-        // Debug.Log("Is issue with gameManager list: " + gameManager);
-
-        // Debug.Log("Is issue with Certain part of list: " + allPlayers[0]);
-        // Debug.Log("Is issue with Certain part of list: " + allPlayers[0].name);
-        // Debug.Log("Is issue with currentPlayer: " + currentPlayer);
 
         if(currentPlayer == allPlayers[0]) {
-            Debug.Log("Changing Player One's Ready Status.");
             gameManager.SetPlayerOneReady(readyToPlay);
         }
         else {
-            Debug.Log("Changing Player Two's Ready Status.");
             gameManager.SetPlayerTwoReady(readyToPlay);
         }
     }

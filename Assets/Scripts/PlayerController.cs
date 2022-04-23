@@ -89,6 +89,9 @@ public class PlayerController : MonoBehaviour
     //------------------------------------------------------
 
     IEnumerator InitialSetup() {
+//        Debug.Log("Game Manager in PlayerController Setup: " + gameManager);
+        CheckGMInstance();
+        yield return new WaitUntil(()=> GameManager.Instance != null);
         usingMixedReality = gameManager.GetUsingMixedReality();
         view = GetComponent<PhotonView>();
         yield return new WaitUntil(()=> view != null);
@@ -108,14 +111,13 @@ public class PlayerController : MonoBehaviour
     }
 
     //------------------------------------------------------
-    //                  CUSTOM FUNCTIONS
+    //                  GENERAL FUNCTIONS
     //------------------------------------------------------
 
     IEnumerator HandleOtherPlayers() {
         newPlayerAdded = false;
         yield return new WaitUntil(() => !newPlayerAdded);
 
-        Debug.Log("Running Player Handler");
         if(!(view.IsMine)) {
             if(usingMixedReality) {
                 HandleMRSetup(this);
@@ -134,6 +136,12 @@ public class PlayerController : MonoBehaviour
 
     private void AssignParent(GameObject targetParent) {
         this.transform.SetParent(targetParent.transform);
+    }
+
+    private void CheckGMInstance() {
+        if(gameManager == null) {
+            gameManager = GameManager.Instance;
+        }
     }
 
 }
