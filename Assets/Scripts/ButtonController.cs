@@ -45,8 +45,9 @@ public class ButtonController : MonoBehaviour
     }
 
     private void UpdateCorrectPlayerStatus() {
+        
         CheckGMInstance();
-
+        currentPlayer = gameManager.GetCurrentPlayer();
         List<GameObject> allPlayers = gameManager.GetCurrentPlayers();
 
         if(currentPlayer == allPlayers[0]) {

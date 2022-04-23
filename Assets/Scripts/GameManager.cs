@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,13 +34,16 @@ public class GameManager : MonoBehaviour
 
     private GameLogic gameLogic;
 
+    [SerializeField] private Canvas gameOverCanvas;
+
+    private GameObject currentPlayer;
+
     // MR Variables
     private GameObject mrPlayer;
     private PhotonView mrView;
     // VR Variables
     private GameObject vrPlayer;
     private PhotonView vrView;
-    
 
     //------------------------------------------------------
     //                   GETTERS/SETTERS
@@ -73,6 +77,12 @@ public class GameManager : MonoBehaviour
     public List<GameObject> GetWeaponObjects() {return weaponObjects;}
     public void SetWeaponObjects(List<GameObject> newList) {weaponObjects = newList;}
 
+    public Canvas GetGameOverCanvas() {return gameOverCanvas;}
+    public void SetGameOverCanvas(Canvas newCanvas) {gameOverCanvas = newCanvas;}
+
+    public GameObject GetCurrentPlayer() {return currentPlayer;}
+    public void SetCurrentPlayer(GameObject newPlayer) {currentPlayer = newPlayer;}
+
     // MR Variables
     public GameObject GetMrPlayer() {return mrPlayer;}
     public void SetMrPlayer(GameObject newPlayer) {mrPlayer = newPlayer;}
@@ -95,6 +105,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake() {
         Instance = this;
+        gameOverCanvas.gameObject.SetActive(false);
     }
 
     private void Start() {

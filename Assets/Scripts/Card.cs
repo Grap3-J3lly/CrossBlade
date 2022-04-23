@@ -18,7 +18,11 @@ public class Card
 
     public enum Weapon {
         Greatsword,
-        TowerShield
+        TowerShield,
+        SwordShield,
+        Dagger,
+        Halberd,
+        Bow
     }
 
     public Weapon weapon;
