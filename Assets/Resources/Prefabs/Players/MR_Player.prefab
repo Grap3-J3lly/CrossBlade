@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b03073a3f18cb41a6b2f2c585e7602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemController: {fileID: 0}
   mrCamera1: {fileID: 527907528981501633}
   mrCamera2: {fileID: 528574909774657252}
   vrCamera: {fileID: 0}
