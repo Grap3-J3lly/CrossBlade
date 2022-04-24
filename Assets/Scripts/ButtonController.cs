@@ -33,14 +33,13 @@ public class ButtonController : MonoBehaviour
     //------------------------------------------------------
 
     public void ButtonHit() {
-        //Debug.Log("Button has been hit successfully");
         
         readyToPlay = !readyToPlay;
         UpdateCorrectPlayerStatus();
     }
 
     public void StopHit() {
-        //Debug.Log("Button no longer pressed");
+        
         
     }
 

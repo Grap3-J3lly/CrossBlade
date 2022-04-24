@@ -61,7 +61,6 @@ public class Card
     }
 
     public void UpdateInPlayCard() {
-        // Need event in Card Controller to call this method
         inPlay = cardObject.GetComponent<CardController>().GetInPlay();
     }
 

@@ -31,7 +31,7 @@ public class DeckController : MonoBehaviour
     }
 
     private void Update() {
-        // Debug.Log("CARDS LIST COUNT: " + cards.Count);
+        
     }
 
     //------------------------------------------------------
@@ -77,7 +77,7 @@ public class DeckController : MonoBehaviour
         
         GameObject greatSwordObject = cardOptions.Find(cardToFind => cardToFind.name.ToLower().Contains("greatsword"));
 
-        GameObject newGreatsword = (GameObject)Instantiate(greatSwordObject, transform.position, greatSwordObject.transform.rotation);
+        GameObject newGreatsword = (GameObject)Instantiate(greatSwordObject, transform.position, gameObject.transform.rotation);
         newGreatsword.transform.SetParent(transform);
 
         card.HandleCardSetup("GreatswordCard", newGreatsword, Card.Weapon.Greatsword, cards);
@@ -89,7 +89,7 @@ public class DeckController : MonoBehaviour
         
         GameObject towerShieldObject = cardOptions.Find(cardToFind => cardToFind.name.ToLower().Contains("towershield"));
 
-        GameObject newTowerShield = (GameObject)Instantiate(towerShieldObject, transform.position, towerShieldObject.transform.rotation);
+        GameObject newTowerShield = (GameObject)Instantiate(towerShieldObject, transform.position, gameObject.transform.rotation);
         newTowerShield.transform.SetParent(transform);
         
         card.HandleCardSetup("TowerShieldCard", newTowerShield, Card.Weapon.TowerShield, cards);
@@ -97,8 +97,6 @@ public class DeckController : MonoBehaviour
     }
 
     public Card GetCardInPlay() {
-
-        Debug.Log("Card List size: " + cards.Count);
 
         Card inPlayCard = cards.Find(cardToFind => cardToFind.inPlay == true);
         return inPlayCard;
