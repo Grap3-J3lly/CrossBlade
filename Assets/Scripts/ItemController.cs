@@ -41,22 +41,23 @@ public class ItemController : MonoBehaviour
     private void SpawnObjectGreatsword(Card chosenCard) {
         GameObject chosenWeapon = chosenCard.weaponObject;
         List<Vector3> greatSwordTransform = weaponTransform.defaultGreatswordTransform;
-        AssignParent(weaponSpawn, chosenWeapon);
+        GameObject newWeapon = (GameObject)Instantiate(chosenWeapon, Vector3.one, Quaternion.identity);
+        AssignParent(weaponSpawn, newWeapon);
         
-        chosenWeapon.transform.localPosition = greatSwordTransform[0];
-        chosenWeapon.transform.localRotation = Quaternion.Euler(greatSwordTransform[1]);
-        chosenWeapon.transform.localScale = greatSwordTransform[2];
+        newWeapon.transform.localPosition = greatSwordTransform[0];
+        newWeapon.transform.localRotation = Quaternion.Euler(greatSwordTransform[1]);
+        newWeapon.transform.localScale = greatSwordTransform[2];
     }
 
     private void SpawnObjectTowerShield(Card chosenCard) {
         GameObject chosenWeapon = chosenCard.weaponObject;
         List<Vector3> towerShieldTransform = weaponTransform.defaultTowerShieldTransform;
-        AssignParent(weaponSpawn, chosenWeapon);
+        GameObject newWeapon = (GameObject)Instantiate(chosenWeapon, Vector3.one, Quaternion.identity);
+        AssignParent(weaponSpawn, newWeapon);
         
-        Debug.Log("TowerShield Transform Position: " + towerShieldTransform[0]);
-        chosenWeapon.transform.localPosition = towerShieldTransform[0];
-        chosenWeapon.transform.localRotation = Quaternion.Euler(towerShieldTransform[1]);
-        chosenWeapon.transform.localScale = towerShieldTransform[2];
+        newWeapon.transform.localPosition = towerShieldTransform[0];
+        newWeapon.transform.localRotation = Quaternion.Euler(towerShieldTransform[1]);
+        newWeapon.transform.localScale = towerShieldTransform[2];
     }
 
     //------------------------------------------------------

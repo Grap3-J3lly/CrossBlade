@@ -41,7 +41,6 @@ public class CardController : MonoBehaviour
     private void OnEnable() {
         interactionBehavior.OnGraspBegin += HandleBeginGrasp;
         interactionBehavior.OnGraspEnd += HandleEndGrasp;
-        //onCardInPlay += ChangeInPlayState;
     }
 
     private void Start() {
@@ -58,7 +57,6 @@ public class CardController : MonoBehaviour
     private void OnDisable() {
         interactionBehavior.OnGraspBegin -= HandleBeginGrasp;
         interactionBehavior.OnGraspEnd -= HandleEndGrasp;
-        //onCardInPlay -= ChangeInPlayState;
     }
 
     //------------------------------------------------------
@@ -104,7 +102,6 @@ public class CardController : MonoBehaviour
 
     private void EnterPlayArea(GameObject potentialPlayArea) {
         if(potentialPlayArea.name.ToLower().Equals("playlocation")) {
-            Debug.Log("Card placed in Play area");
             inPlay = true;
             CardInPlayEvent();
         }
@@ -112,7 +109,6 @@ public class CardController : MonoBehaviour
 
     private void ExitPlayArea(GameObject potentialPlayArea) {
         if(potentialPlayArea.name.ToLower().Equals("playlocation")) {
-            Debug.Log("Card removed from Play area");
             inPlay = false;
             CardInPlayEvent();
         }

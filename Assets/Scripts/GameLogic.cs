@@ -74,7 +74,7 @@ public class GameLogic : MonoBehaviour
         playerOneDeckController = playerOne.GetComponent<PlayerController>().GetDeckController();
         playerOneItemController = playerOne.GetComponent<PlayerController>().GetItemController();
 
-        Card playerOneCard = playerOneDeckController.GetCardInPlay();
+        playerOneCard = playerOneDeckController.GetCardInPlay();
 
         playerOneItemController.HandleItemSpawn(playerOneCard.weapon);
     }
@@ -85,7 +85,7 @@ public class GameLogic : MonoBehaviour
         playerTwoDeckController = playerTwo.GetComponent<PlayerController>().GetDeckController();
         playerTwoItemController = playerTwo.GetComponent<PlayerController>().GetItemController();
 
-        Card playerTwoCard = playerTwoDeckController.GetCardInPlay();
+        playerTwoCard = playerTwoDeckController.GetCardInPlay();
 
         playerTwoItemController.HandleItemSpawn(playerTwoCard.weapon);
     }
@@ -111,9 +111,14 @@ public class GameLogic : MonoBehaviour
         FindWeakness(playerOneCard.weapon, playerTwoCard.weapon);
         gameManager.GetGameOverCanvas().gameObject.SetActive(true);
         AssignGameOverText(playerOne, playerTwo);
+
+        Debug.Log("PLAYER ONE WIN/LOSE: " + playerOneWin);
+        Debug.Log("PLAYER TWO WIN/LOSE: " + playerTwoWin);
+        Debug.Log("PLAYERS TIED: " + playersTied);
     }
 
     private void FindWeakness(Card.Weapon playerOneWeapon, Card.Weapon playerTwoWeapon) {
+        Debug.Log("Entering FindWeakness");
         if(playerOneWeapon == Card.Weapon.Greatsword) {
             if(playerOneWeapon == playerTwoWeapon) {
                 playerOneWin = false;
@@ -158,26 +163,33 @@ public class GameLogic : MonoBehaviour
 
     private void AssignGameOverText(GameObject playerOne, GameObject playerTwo) {
         
-        gameOverText = gameManager.GetGameOverCanvas().GetComponent<TextMeshProUGUI>();
+        gameOverText = gameManager.GetGameOverCanvas().GetComponentInChildren<TextMeshProUGUI>();
+
+        Debug.Log("GameOverText Object: " + gameOverText);
 
         if(playersTied) {
             gameOverText.text = tieText;
+            return;
         }
 
         if(playerOne == gameManager.GetCurrentPlayer()) {
             if(playerOneWin) {
                 gameOverText.text = winText;
+                return;
             }
             else{
                 gameOverText.text = loseText;
+                return;
             }
         }
         else {
             if(playerTwoWin) {
                 gameOverText.text = winText;
+                return;
             }
             else{
                 gameOverText.text = loseText;
+                return;
             }
         }
     }
