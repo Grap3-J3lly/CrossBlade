@@ -764,6 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b03073a3f18cb41a6b2f2c585e7602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemController: {fileID: 0}
   mrCamera1: {fileID: 0}
   mrCamera2: {fileID: 0}
   vrCamera: {fileID: 7845673797558311908}
@@ -1501,7 +1502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CameraFloorOffsetObject: {fileID: 7845673797443311562}
   m_RequestedTrackingMode: 0
-  m_TrackingOriginMode: 1
+  m_TrackingOriginMode: 2
   m_TrackingSpace: 0
   m_CameraYOffset: 1.36144
 --- !u!1 &7845673798665848815
