@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private DeckController deckController;
 
+    [SerializeField] private ItemController itemController;
+
     // MR Player Variables
     [SerializeField] private GameObject mrCamera1;
     [SerializeField] private GameObject mrCamera2;
@@ -35,6 +37,9 @@ public class PlayerController : MonoBehaviour
 
     public DeckController GetDeckController() {return deckController;}
     public void SetDeckController(DeckController newController) {deckController = newController;}
+
+    public ItemController GetItemController() {return itemController;}
+    public void SetItemController(ItemController newController) {itemController = newController;}
 
     // MR Player Variables
     public GameObject GetMrCamera1() {return mrCamera1;}
@@ -72,6 +77,7 @@ public class PlayerController : MonoBehaviour
             
             HandleVRSetup(gameManager.GetMrPlayer().GetComponent<PlayerController>());
         }
+        gameManager.SetCurrentPlayer(gameObject);
         AssignDeck();
     }
 
@@ -84,6 +90,9 @@ public class PlayerController : MonoBehaviour
     //------------------------------------------------------
 
     IEnumerator InitialSetup() {
+//        Debug.Log("Game Manager in PlayerController Setup: " + gameManager);
+        CheckGMInstance();
+        yield return new WaitUntil(()=> GameManager.Instance != null);
         usingMixedReality = gameManager.GetUsingMixedReality();
         view = GetComponent<PhotonView>();
         yield return new WaitUntil(()=> view != null);
@@ -103,14 +112,13 @@ public class PlayerController : MonoBehaviour
     }
 
     //------------------------------------------------------
-    //                  CUSTOM FUNCTIONS
+    //                  GENERAL FUNCTIONS
     //------------------------------------------------------
 
     IEnumerator HandleOtherPlayers() {
         newPlayerAdded = false;
         yield return new WaitUntil(() => !newPlayerAdded);
 
-        Debug.Log("Running Player Handler");
         if(!(view.IsMine)) {
             if(usingMixedReality) {
                 HandleMRSetup(this);
@@ -129,6 +137,12 @@ public class PlayerController : MonoBehaviour
 
     private void AssignParent(GameObject targetParent) {
         this.transform.SetParent(targetParent.transform);
+    }
+
+    private void CheckGMInstance() {
+        if(gameManager == null) {
+            gameManager = GameManager.Instance;
+        }
     }
 
 }

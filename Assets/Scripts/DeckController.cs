@@ -31,7 +31,7 @@ public class DeckController : MonoBehaviour
     }
 
     private void Update() {
-        // Debug.Log("CARDS LIST COUNT: " + cards.Count);
+        
     }
 
     //------------------------------------------------------
@@ -74,37 +74,29 @@ public class DeckController : MonoBehaviour
 
     private void SpawnCardGreatsword() {
         Card card = new Card();
-        card.cardName = "GreatswordCard";
+        
         GameObject greatSwordObject = cardOptions.Find(cardToFind => cardToFind.name.ToLower().Contains("greatsword"));
 
-        GameObject newGreatsword = (GameObject)Instantiate(greatSwordObject, transform.position, greatSwordObject.transform.rotation);
+        GameObject newGreatsword = (GameObject)Instantiate(greatSwordObject, transform.position, gameObject.transform.rotation);
         newGreatsword.transform.SetParent(transform);
-        card.cardObject = newGreatsword;
-        card.weapon = Card.Weapon.Greatsword;
-        card.AssignWeaponObject(card.weapon);
 
-        cards.Add(card);
-        Debug.Log("ADDED TO CARDS");
+        card.HandleCardSetup("GreatswordCard", newGreatsword, Card.Weapon.Greatsword, cards);
+        
     }
 
     private void SpawnCardTowerShield() {
         Card card = new Card();
-        card.cardName = "TowerShieldCard";
+        
         GameObject towerShieldObject = cardOptions.Find(cardToFind => cardToFind.name.ToLower().Contains("towershield"));
 
-        GameObject newTowerShield = (GameObject)Instantiate(towerShieldObject, transform.position, towerShieldObject.transform.rotation);
+        GameObject newTowerShield = (GameObject)Instantiate(towerShieldObject, transform.position, gameObject.transform.rotation);
         newTowerShield.transform.SetParent(transform);
-        card.cardObject = newTowerShield;
-        card.weapon = Card.Weapon.TowerShield;
-        card.AssignWeaponObject(card.weapon);
+        
+        card.HandleCardSetup("TowerShieldCard", newTowerShield, Card.Weapon.TowerShield, cards);
 
-        cards.Add(card);
-        Debug.Log("ADDED TO CARDS");
     }
 
     public Card GetCardInPlay() {
-
-        Debug.Log("Card List size: " + cards.Count);
 
         Card inPlayCard = cards.Find(cardToFind => cardToFind.inPlay == true);
         return inPlayCard;

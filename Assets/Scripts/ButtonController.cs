@@ -33,34 +33,26 @@ public class ButtonController : MonoBehaviour
     //------------------------------------------------------
 
     public void ButtonHit() {
-        //Debug.Log("Button has been hit successfully");
         
         readyToPlay = !readyToPlay;
         UpdateCorrectPlayerStatus();
     }
 
     public void StopHit() {
-        //Debug.Log("Button no longer pressed");
+        
         
     }
 
     private void UpdateCorrectPlayerStatus() {
-        CheckGMInstance();
-
-        List<GameObject> allPlayers = gameManager.GetCurrentPlayers();
         
-        // Debug.Log("Is issue with gameManager list: " + gameManager);
-
-        // Debug.Log("Is issue with Certain part of list: " + allPlayers[0]);
-        // Debug.Log("Is issue with Certain part of list: " + allPlayers[0].name);
-        // Debug.Log("Is issue with currentPlayer: " + currentPlayer);
+        CheckGMInstance();
+        currentPlayer = gameManager.GetCurrentPlayer();
+        List<GameObject> allPlayers = gameManager.GetCurrentPlayers();
 
         if(currentPlayer == allPlayers[0]) {
-            Debug.Log("Changing Player One's Ready Status.");
             gameManager.SetPlayerOneReady(readyToPlay);
         }
         else {
-            Debug.Log("Changing Player Two's Ready Status.");
             gameManager.SetPlayerTwoReady(readyToPlay);
         }
     }
