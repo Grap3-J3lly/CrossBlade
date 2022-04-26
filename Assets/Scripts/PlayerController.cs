@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     // MR Player Variables
     [SerializeField] private GameObject mrCamera1;
-    [SerializeField] private GameObject mrCamera2;
+    //[SerializeField] private GameObject mrCamera2;
 
     // VR Player Variables
     [SerializeField] private GameObject vrCamera;
@@ -45,8 +45,8 @@ public class PlayerController : MonoBehaviour
     public GameObject GetMrCamera1() {return mrCamera1;}
     public void SetMrCamera1(GameObject newCamera) {mrCamera1 = newCamera;}
 
-    public GameObject GetMrCamera2() {return mrCamera2;}
-    public void SetMrCamera2(GameObject newCamera) {mrCamera2 = newCamera;}
+    // public GameObject GetMrCamera2() {return mrCamera2;}
+    // public void SetMrCamera2(GameObject newCamera) {mrCamera2 = newCamera;}
     
     // VR Player Variables
     public GameObject GetVrCamera() {return vrCamera;}
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
         gameManager.SetVrPlayer(gameObject);
 
         mrController.GetMrCamera1().SetActive(false);
-        mrController.GetMrCamera2().SetActive(false);
+        //mrController.GetMrCamera2().SetActive(false);
     }
 
     //------------------------------------------------------

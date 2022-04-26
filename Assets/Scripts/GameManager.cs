@@ -50,6 +50,13 @@ public class GameManager : MonoBehaviour
     //------------------------------------------------------
 
     // General Variables    
+
+    public Vector3 GetPlayerOneStartPos() {return playerOneStartingPos;}
+    public void SetPlayerOneStartPos(Vector3 newPos) {playerOneStartingPos = newPos;}
+
+    public Vector3 GetPlayerTwoStartPos() {return playerTwoStartingPos;}
+    public void SetPlayerTwoStartPos(Vector3 newPos) {playerTwoStartingPos = newPos;}
+
     public Quaternion GetPlayerOneAngle() {return playerOneAngle;}
     public void SetPlayerOneAngle(Quaternion newAngle) {playerOneAngle = newAngle;}
 
