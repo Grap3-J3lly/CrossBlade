@@ -56,9 +56,11 @@ public class SpawnController : MonoBehaviour
     private void AddNewPlayer() {
         Quaternion startingAngle;
         if(gameManager.GetCurrentPlayers().Count < 1) {
+            startingPosition = gameManager.GetPlayerOneStartPos();
             startingAngle = gameManager.GetPlayerOneAngle();
         }
         else {
+            startingPosition = gameManager.GetPlayerTwoStartPos();
             startingAngle = gameManager.GetPlayerTwoAngle();
         }
 
